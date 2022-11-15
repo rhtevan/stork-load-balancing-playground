@@ -15,13 +15,13 @@ public class Services {
     @ConfigProperty(name = "blue.http-port", defaultValue = "9000")
     int bluePort;
 
-    @ConfigProperty(name = "blue.delay-in-ms", defaultValue = "100")
+    @ConfigProperty(name = "blue.delay-in-ms", defaultValue = "500")
     int blueDelay;
 
     @ConfigProperty(name = "yellow.http-port", defaultValue = "9001")
     int yellowPort;
 
-    @ConfigProperty(name = "yellow.delay-in-ms", defaultValue = "500")
+    @ConfigProperty(name = "yellow.delay-in-ms", defaultValue = "1000")
     int yellowDelay;
 
     @ConfigProperty(name = "green.http-port", defaultValue = "9002")
@@ -53,6 +53,7 @@ public class Services {
                     vertx.setTimer(5, x -> {
                         if (random.nextInt(100) > (100 - greenFailureRatio)) {
                             req.response().setStatusCode(500).endAndForget("❌");
+                            // req.response().endAndForget("🟢");
                         } else {
                             req.response().endAndForget("🟢");
                         }
